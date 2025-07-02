@@ -1,0 +1,34 @@
+command:
+  - ${env}
+  - torchrun
+  - --nproc_per_node=2
+  - ${program}
+  - ${args}
+
+program: llama_muon_1BT_sweeps.py
+method: bayes
+metric:
+  name: val_loss
+  goal: minimize
+
+parameters:
+  embed_learning_rate:
+    distribution: log_uniform_values
+    min: 1.0e-4
+    max: 6.0e-4
+
+  muon_learning_rate:
+    distribution: log_uniform_values
+    min: 2.0e-4
+    max: 3.0e-3
+
+  weight_decay:
+    distribution: log_uniform_values
+    min: 0.01
+    max: 0.2
+
+  muon_momentum:
+    value: 0.95
+  
+  warmup_iters:
+    value: 30
