@@ -300,6 +300,8 @@ def evaluate_model(model, val_loader, pad_id):
     model.train()
     return total_loss / total_steps if total_steps > 0 else 0
 
+# https://github.com/IsNoobgrammer/XLA-Trainer
+
 def train(FLAGS):
     if FLAGS['WANDB'] and xm.is_master_ordinal(): 
         wandb.init(project=FLAGS['PROJECT'], config=FLAGS, name=f"run-{FLAGS['ATTENTION_TYPE']}")
