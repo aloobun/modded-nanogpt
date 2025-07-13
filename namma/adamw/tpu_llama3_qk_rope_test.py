@@ -172,6 +172,9 @@ def apply_rope(x, rope):
     c, s = rope[..., ::2], rope[..., 1::2]
     return torch.cat([x1 * c - x2 * s, x1 * s + x2 * c], dim=-1)
 
+## https://kexue.fm/archives/10862
+# https://github.com/kyegomez/VO-ROPE
+
 def apply_inverse_rope(x, rope):
     x1, x2 = x[..., ::2], x[..., 1::2]
     c, s = rope[..., ::2], -rope[..., 1::2]
